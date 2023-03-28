@@ -1,5 +1,6 @@
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 #include <iostream>
 
 int	main(void) {
@@ -43,6 +44,7 @@ int	main(void) {
 		ct.attack("foo") ;
 	}
 	std::cout << std::endl ;
+	std::cout << "==================== ScavTrap ====================" << std::endl ;
 	// ScavTrap
 	// Attack / no more energy
 	{
@@ -89,5 +91,54 @@ int	main(void) {
 		ScavTrap st("ScavTaro") ;
 
 		st.guardGate() ;
+	}
+	std::cout << std::endl ;
+	std::cout << "==================== FragTrap ====================" << std::endl ;
+	// FragTrap
+	// Attack / no more energy
+	{
+		FragTrap ft("FragJohn") ;
+
+		for ( int i = 1; i <= 101; i++ ) {
+			std::cout << i << ": " ;
+			ft.attack("foo") ;
+		}
+		std::cout << std::endl ;
+	}
+	std::cout << std::endl ;
+	// be repaired / no more energy
+	{
+		FragTrap ft("FragBob") ;
+
+		for ( int i = 1; i <= 101; i++ ) {
+			std::cout << i << ": " ;
+			ft.beRepaired(i) ;
+		}
+		std::cout << std::endl ;
+	}
+	std::cout << std::endl ;
+	// no hitpoint
+	{
+		FragTrap ft("FragMike") ;
+
+		ft.takeDamage(100) ;
+		ft.beRepaired(5) ;
+		ft.attack("foo") ;
+	}
+	std::cout << std::endl ;
+	// no hitpoint
+	{
+		FragTrap ft("FragRob") ;
+
+		ft.takeDamage(150) ;
+		ft.beRepaired(5) ;
+		ft.attack("foo") ;
+	}
+	std::cout << std::endl ;
+	// gate
+	{
+		FragTrap ft("FragTaro") ;
+
+		ft.highFiveGuys() ;
 	}
 }
