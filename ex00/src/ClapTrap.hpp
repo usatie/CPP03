@@ -4,14 +4,6 @@
 #include <string>
 
 class ClapTrap {
- private:
-  std::string _name;
-  int _hitPoints;
-  int _energyPoints;
-  int _attackDamage;
-  // member functions
-  bool canMove() const;
-
  public:
   ClapTrap();
   explicit ClapTrap(const std::string& name);
@@ -22,6 +14,14 @@ class ClapTrap {
   void attack(const std::string& target);
   void takeDamage(unsigned int amount);
   void beRepaired(unsigned int amount);
+
+ private:
+  std::string _name;
+  int _hitPoints;
+  int _energyPoints;
+  int _attackDamage;
+  // member functions
+  bool canMove() const;
 };
 
 #endif
