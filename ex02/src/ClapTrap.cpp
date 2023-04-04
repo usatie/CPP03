@@ -79,8 +79,8 @@ void ClapTrap::beRepaired(unsigned int amount) {
   if (!canMove()) {
     return;
   }
-  std::cout << "ClapTrap " << _name << " is repaired and gets " << amount
-            << " hit points back! Now HP is " << _hitPoints << "." << std::endl;
   _energyPoints--;
   _hitPoints += amount;
+  std::cout << "ClapTrap " << _name << " is repaired and gets " << amount
+            << " hit points back! Now HP is " << _hitPoints << "." << std::endl;
 }

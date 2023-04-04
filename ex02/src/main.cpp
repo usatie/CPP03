@@ -80,6 +80,8 @@ void test_fragtrap() {
     FragTrap ft("FragTaro");
 
     ft.highFiveGuys();
+    ft.takeDamage(150);
+    ft.highFiveGuys();
   }
 }
 

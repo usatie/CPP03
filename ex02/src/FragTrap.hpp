@@ -8,6 +8,7 @@ class FragTrap : public ClapTrap {
   static const int _defaultHitPoints = 100;
   static const int _defaultEnergyPoints = 100;
   static const int _defaultAttackDamage = 30;
+  bool canMove() const;
 
  public:
   FragTrap();
