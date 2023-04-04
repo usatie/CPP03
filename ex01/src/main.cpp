@@ -1,5 +1,5 @@
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
