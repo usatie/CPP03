@@ -2,18 +2,22 @@
 
 #include <iostream>
 
+// Hit points (10), represent the health of the ClapTrap
+// Energy points (10)
+// Attack damage (0)
 ClapTrap::ClapTrap()
-    : _name(""), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+    : _name(""),
+      _hitPoints(_defaultHitPoints),
+      _energyPoints(_defaultEnergyPoints),
+      _attackDamage(_defaultAttackDamage) {
   std::cout << "[ ClapTrap Default constructor called ]" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string n, int h, int e, int a)
-    : _name(n), _hitPoints(h), _energyPoints(e), _attackDamage(a) {
-  std::cout << "[ ClapTrap constructor called ]" << std::endl;
-}
-
 ClapTrap::ClapTrap(const std::string& name)
-    : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+    : _name(name),
+      _hitPoints(_defaultHitPoints),
+      _energyPoints(_defaultEnergyPoints),
+      _attackDamage(_defaultAttackDamage) {
   std::cout << "[ ClapTrap constructor called ]" << std::endl;
 }
 
@@ -25,12 +29,15 @@ ClapTrap::ClapTrap(const ClapTrap& c)
   std::cout << "[ ClapTrap Copy constructor called ]" << std::endl;
 }
 
-ClapTrap& ClapTrap::operator=(const ClapTrap& c) {
+ClapTrap& ClapTrap::operator=(const ClapTrap& rhs) {
   std::cout << "[ ClapTrap Copy assignment operator called ]" << std::endl;
-  _name = c._name;
-  _hitPoints = c._hitPoints;
-  _energyPoints = c._energyPoints;
-  _attackDamage = c._attackDamage;
+  if (this == &rhs) {
+    return *this;
+  }
+  _name = rhs._name;
+  _hitPoints = rhs._hitPoints;
+  _energyPoints = rhs._energyPoints;
+  _attackDamage = rhs._attackDamage;
   return *this;
 }
 
@@ -38,10 +45,22 @@ ClapTrap::~ClapTrap() {
   std::cout << "[ ClapTrap destructor is called ]" << std::endl;
 }
 
+bool ClapTrap::canMove() const {
+  if (_hitPoints <= 0) {
+    std::cout << "ClapTrap " << _name << " has no hit points." << std::endl;
+    return false;
+  }
+  if (_energyPoints <= 0) {
+    std::cout << "ClapTrap " << _name << " has no energy points." << std::endl;
+    return false;
+  }
+  return true;
+}
+
 // Member functions
 // ClapTrap <name> attacks <target>, causing <damage> points of damage!
 void ClapTrap::attack(const std::string& target) {
-  if (_energyPoints <= 0 || _hitPoints <= 0) {
+  if (!canMove()) {
     return;
   }
   _energyPoints--;
@@ -57,7 +76,7 @@ void ClapTrap::takeDamage(unsigned int amount) {
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
-  if (_energyPoints <= 0 || _hitPoints <= 0) {
+  if (!canMove()) {
     return;
   }
   std::cout << "ClapTrap " << _name << " is repaired and gets " << amount

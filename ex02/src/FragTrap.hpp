@@ -3,18 +3,19 @@
 
 #include "ClapTrap.hpp"
 
-class FragTrap : ClapTrap {
+class FragTrap : public ClapTrap {
  private:
+  static const int _defaultHitPoints = 100;
+  static const int _defaultEnergyPoints = 100;
+  static const int _defaultAttackDamage = 30;
+
  public:
   FragTrap();
-  FragTrap(const std::string& name);
+  explicit FragTrap(const std::string& name);
   FragTrap(const FragTrap& f);
   FragTrap& operator=(const FragTrap& f);
   ~FragTrap();
   // member functions
-  void attack(const std::string& target);
-  void takeDamage(unsigned int amount);
-  void beRepaired(unsigned int amount);
   void highFiveGuys();
 };
 

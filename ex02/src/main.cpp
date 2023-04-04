@@ -1,105 +1,38 @@
+#include <iomanip>
 #include <iostream>
 
 #include "ClapTrap.hpp"
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
 
-int main(void) {
-  // Attack / no more energy
-  {
-    ClapTrap ct("John");
+#define RESET "\033[m"
+#define GREEN "\e[0;32m"
+#define RED "\e[0;31m"
+#define BOLD "\033[1m"
 
-    for (int i = 1; i <= 11; i++) {
-      std::cout << i << ": ";
-      ct.attack("foo");
-    }
-    std::cout << std::endl;
-  }
-  std::cout << std::endl;
-  // be repaired / no more energy
-  {
-    ClapTrap ct("Bob");
+// print title in green color surrounded by '='
+void printTitle(std::string const& title) {
+  // set color to green
+  std::cout << GREEN << BOLD;
+  // print '='
+  std::cout << std::setfill('=') << std::setw(80) << "" << std::endl;
+  // print title at the center
+  std::cout << std::setfill(' ') << std::setw(40 - title.length() / 2) << ""
+            << title << std::endl;
+  // print '='
+  std::cout << std::setfill('=') << std::setw(80) << "" << std::endl;
+  // reset color
+  std::cout << RESET << std::setfill(' ') << std::setw(0);
+}
 
-    for (int i = 1; i <= 11; i++) {
-      std::cout << i << ": ";
-      ct.beRepaired(i);
-    }
-    std::cout << std::endl;
-  }
-  std::cout << std::endl;
-  // no hitpoint
-  {
-    ClapTrap ct("Mike");
-
-    ct.takeDamage(10);
-    ct.beRepaired(5);
-    ct.attack("foo");
-  }
-  std::cout << std::endl;
-  // no hitpoint
-  {
-    ClapTrap ct("Rob");
-
-    ct.takeDamage(15);
-    ct.beRepaired(5);
-    ct.attack("foo");
-  }
-  std::cout << std::endl;
-  std::cout << "==================== ScavTrap ===================="
-            << std::endl;
-  // ScavTrap
-  // Attack / no more energy
-  {
-    ScavTrap st("ScavJohn");
-
-    for (int i = 1; i <= 51; i++) {
-      std::cout << i << ": ";
-      st.attack("foo");
-    }
-    std::cout << std::endl;
-  }
-  std::cout << std::endl;
-  // be repaired / no more energy
-  {
-    ScavTrap st("ScavBob");
-
-    for (int i = 1; i <= 51; i++) {
-      std::cout << i << ": ";
-      st.beRepaired(i);
-    }
-    std::cout << std::endl;
-  }
-  std::cout << std::endl;
-  // no hitpoint
-  {
-    ScavTrap st("ScavMike");
-
-    st.takeDamage(100);
-    st.beRepaired(5);
-    st.attack("foo");
-  }
-  std::cout << std::endl;
-  // no hitpoint
-  {
-    ScavTrap st("ScavRob");
-
-    st.takeDamage(150);
-    st.beRepaired(5);
-    st.attack("foo");
-  }
-  std::cout << std::endl;
-  // gate
-  {
-    ScavTrap st("ScavTaro");
-
-    st.guardGate();
-  }
-  std::cout << std::endl;
+void test_fragtrap() {
   std::cout << "==================== FragTrap ===================="
             << std::endl;
+  printTitle("FragTrap");
   // FragTrap
   // Attack / no more energy
   {
+    printTitle("Attack / no more energy");
     FragTrap ft("FragJohn");
 
     for (int i = 1; i <= 101; i++) {
@@ -111,6 +44,7 @@ int main(void) {
   std::cout << std::endl;
   // be repaired / no more energy
   {
+    printTitle("be repaired / no more energy");
     FragTrap ft("FragBob");
 
     for (int i = 1; i <= 101; i++) {
@@ -122,6 +56,7 @@ int main(void) {
   std::cout << std::endl;
   // no hitpoint
   {
+    printTitle("no hitpoint");
     FragTrap ft("FragMike");
 
     ft.takeDamage(100);
@@ -131,6 +66,7 @@ int main(void) {
   std::cout << std::endl;
   // no hitpoint
   {
+    printTitle("no hitpoint");
     FragTrap ft("FragRob");
 
     ft.takeDamage(150);
@@ -138,10 +74,13 @@ int main(void) {
     ft.attack("foo");
   }
   std::cout << std::endl;
-  // gate
+  // high five guys
   {
+    printTitle("high five guys");
     FragTrap ft("FragTaro");
 
     ft.highFiveGuys();
   }
 }
+
+int main(void) { test_fragtrap(); }
