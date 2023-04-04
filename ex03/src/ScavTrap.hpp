@@ -3,12 +3,14 @@
 
 #include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap {
+class ScavTrap : virtual public ClapTrap {
  private:
+  bool canMove() const;
+
+ protected:
   static const int _defaultHitPoints = 100;
   static const int _defaultEnergyPoints = 50;
   static const int _defaultAttackDamage = 20;
-  bool canMove() const;
 
  public:
   ScavTrap();

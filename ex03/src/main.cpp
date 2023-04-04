@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "ClapTrap.hpp"
+#include "DiamondTrap.hpp"
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
 
@@ -25,19 +26,17 @@ void printTitle(std::string const& title) {
   std::cout << RESET << std::setfill(' ') << std::setw(0);
 }
 
-void test_fragtrap() {
-  std::cout << "==================== FragTrap ===================="
-            << std::endl;
-  printTitle("FragTrap");
+void test_diamondtrap() {
+  printTitle("DiamondTrap");
   // FragTrap
   // Attack / no more energy
   {
     printTitle("Attack / no more energy");
-    FragTrap ft("FragJohn");
+    DiamondTrap dt("DiamondJohn");
 
     for (int i = 1; i <= 101; i++) {
       std::cout << i << ": ";
-      ft.attack("foo");
+      dt.attack("foo");
     }
     std::cout << std::endl;
   }
@@ -45,11 +44,11 @@ void test_fragtrap() {
   // be repaired / no more energy
   {
     printTitle("be repaired / no more energy");
-    FragTrap ft("FragBob");
+    DiamondTrap dt("DiamondBob");
 
     for (int i = 1; i <= 101; i++) {
       std::cout << i << ": ";
-      ft.beRepaired(i);
+      dt.beRepaired(i);
     }
     std::cout << std::endl;
   }
@@ -57,32 +56,49 @@ void test_fragtrap() {
   // no hitpoint
   {
     printTitle("no hitpoint");
-    FragTrap ft("FragMike");
+    DiamondTrap dt("DiamondMike");
 
-    ft.takeDamage(100);
-    ft.beRepaired(5);
-    ft.attack("foo");
+    dt.takeDamage(100);
+    dt.beRepaired(5);
+    dt.attack("foo");
   }
   std::cout << std::endl;
   // no hitpoint
   {
     printTitle("no hitpoint");
-    FragTrap ft("FragRob");
+    DiamondTrap dt("DiamondRob");
 
-    ft.takeDamage(150);
-    ft.beRepaired(5);
-    ft.attack("foo");
+    dt.takeDamage(150);
+    dt.beRepaired(5);
+    dt.attack("foo");
   }
   std::cout << std::endl;
+  // guardGate
+  {
+    printTitle("guardGate");
+    DiamondTrap dt("DiamondSteve");
+
+    dt.guardGate();
+  }
   // high five guys
   {
     printTitle("high five guys");
-    FragTrap ft("FragTaro");
+    DiamondTrap dt("DiamondTaro");
 
-    ft.highFiveGuys();
-    ft.takeDamage(150);
-    ft.highFiveGuys();
+    dt.highFiveGuys();
+    dt.takeDamage(150);
+    dt.highFiveGuys();
+  }
+  std::cout << std::endl;
+  // whoAmI
+  {
+    printTitle("whoAmI");
+    DiamondTrap dt("DiamondJiro");
+    DiamondTrap dt2;
+
+    dt.whoAmI();
+    dt2.whoAmI();
   }
 }
 
-int main(void) { test_fragtrap(); }
+int main(void) { test_diamondtrap(); }
