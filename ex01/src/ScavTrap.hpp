@@ -5,9 +5,9 @@
 
 class ScavTrap : public ClapTrap {
  private:
-  static const int InitialHP = 100;
-  static const int InitialEP = 50;
-  static const int InitialAD = 20;
+  static const int _defaultHitPoints = 100;
+  static const int _defaultEnergyPoints = 50;
+  static const int _defaultAttackDamage = 20;
   bool canMove() const;
 
  public:

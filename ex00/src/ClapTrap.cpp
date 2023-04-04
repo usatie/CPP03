@@ -60,9 +60,6 @@ void ClapTrap::attack(const std::string& target) {
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
-  if (!canMove()) {
-    return;
-  }
   _hitPoints -= amount;
   std::cout << "ClapTrap " << _name << " takes " << amount
             << " points of damage! Now HP is " << _hitPoints << "."

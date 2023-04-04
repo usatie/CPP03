@@ -5,14 +5,16 @@
 
 class ClapTrap {
  private:
-  void init(int h, int e, int a);
+  static const int _defaultHitPoints = 10;
+  static const int _defaultEnergyPoints = 10;
+  static const int _defaultAttackDamage = 0;
+  bool canMove() const;
 
  protected:
   std::string _name;
   int _hitPoints;
   int _energyPoints;
   int _attackDamage;
-  bool canMove() const;
 
  public:
   ClapTrap();

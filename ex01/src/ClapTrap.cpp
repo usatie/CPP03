@@ -5,31 +5,39 @@
 // Hit points (10), represent the health of the ClapTrap
 // Energy points (10)
 // Attack damage (0)
-void ClapTrap::init(int h = 10, int e = 10, int a = 0) {
-  _hitPoints = h;
-  _energyPoints = e;
-  _attackDamage = a;
-}
-
-ClapTrap::ClapTrap() : _name("") {
+ClapTrap::ClapTrap()
+    : _name(""),
+      _hitPoints(_defaultHitPoints),
+      _energyPoints(_defaultEnergyPoints),
+      _attackDamage(_defaultAttackDamage) {
   std::cout << "[ ClapTrap Default constructor called ]" << std::endl;
-  init();
 }
 
-ClapTrap::ClapTrap(const std::string& name) : _name(name) {
+ClapTrap::ClapTrap(const std::string& name)
+    : _name(name),
+      _hitPoints(_defaultHitPoints),
+      _energyPoints(_defaultEnergyPoints),
+      _attackDamage(_defaultAttackDamage) {
   std::cout << "[ ClapTrap constructor called ]" << std::endl;
-  init();
 }
 
-ClapTrap::ClapTrap(const ClapTrap& c) : _name(c._name) {
+ClapTrap::ClapTrap(const ClapTrap& c)
+    : _name(c._name),
+      _hitPoints(c._hitPoints),
+      _energyPoints(c._energyPoints),
+      _attackDamage(c._attackDamage) {
   std::cout << "[ ClapTrap Copy constructor called ]" << std::endl;
-  init(c._hitPoints, c._energyPoints, c._attackDamage);
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& rhs) {
   std::cout << "[ ClapTrap Copy assignment operator called ]" << std::endl;
+  if (this == &rhs) {
+    return *this;
+  }
   _name = rhs._name;
-  init(rhs._hitPoints, rhs._energyPoints, rhs._attackDamage);
+  _hitPoints = rhs._hitPoints;
+  _energyPoints = rhs._energyPoints;
+  _attackDamage = rhs._attackDamage;
   return *this;
 }
 
@@ -61,9 +69,6 @@ void ClapTrap::attack(const std::string& target) {
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
-  if (!canMove()) {
-    return;
-  }
   _hitPoints -= amount;
   std::cout << "ClapTrap " << _name << " takes " << amount
             << " points of damage! Now HP is " << _hitPoints << "."
